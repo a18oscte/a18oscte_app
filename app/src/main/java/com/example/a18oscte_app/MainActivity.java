@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String o) {
             super.onPostExecute(o);
 
-            final ArrayList<Snus> mountainArr = new ArrayList();
+            final ArrayList<Snus> snusArr = new ArrayList();
 
             class lista {
                 public String name;
@@ -197,10 +197,10 @@ public class MainActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String message = mountainArr.get(position).info();
-                    String Title = mountainArr.get(position).namn();
-                    String url = mountainArr.get(position).img();
-                    launchSecondActivity(view, message, Title, url,"hej");
+                    String message = snusArr.get(position).info();
+                    String Title = snusArr.get(position).namn();
+                    String url = snusArr.get(position).img();
+                    launchSecondActivity(view, message, Title, url);
                 }
             });
             // This code executes after we have received our data. The String object o holds
@@ -219,9 +219,9 @@ public class MainActivity extends AppCompatActivity {
 
                     Snus m = new Snus(json1.getString("name"),json1.getString("company"),json1.getString("location"),json1.getString("category"), json1.getInt("size"),json1.getInt("cost"), json1.getString("auxdata"));
 
-                    mountainArr.add(m);
+                    snusArr.add(m);
 
-                    lista newUser = new lista(mountainArr.get(i).namn(), mountainArr.get(i).com(), mountainArr.get(i).cost());
+                    lista newUser = new lista(snusArr.get(i).namn(), snusArr.get(i).com(), snusArr.get(i).cost());
 
                     adapter.add(newUser);
 
@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void launchSecondActivity(View view, String n, String t, String u, String ur) {
+    public void launchSecondActivity(View view, String n, String t, String u) {
         Intent intent = new Intent(this, Snusdetails.class);
         intent.putExtra(EXTRA_MESSAGE, n);
         intent.putExtra(EXTRA_MESSAGE2, t);
