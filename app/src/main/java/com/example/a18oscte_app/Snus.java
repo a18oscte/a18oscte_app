@@ -35,8 +35,8 @@ public class Snus {
         return company;
     }
 
-    public String hei(){
-        String he = mangd + " Meters";
+    public String cost(){
+        String he = pris + " Kr/st";
         return he;
     }
 
