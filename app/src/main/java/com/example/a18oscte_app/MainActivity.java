@@ -2,6 +2,8 @@ package com.example.a18oscte_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -149,11 +152,13 @@ public class MainActivity extends AppCompatActivity {
                 public String name;
                 public String lo;
                 public String heigth;
+                public String bild;
 
-                public lista(String name,String lo, String heigth) {
+                public lista(String name,String lo, String heigth, String bild) {
                     this.name = name;
                     this.lo = lo;
                     this.heigth = heigth;
+                    this.bild = bild;
                 }
             }
 
@@ -174,10 +179,13 @@ public class MainActivity extends AppCompatActivity {
                     TextView tvn = (TextView) convertView.findViewById(R.id.list_item_textview);
                     TextView tvl = (TextView) convertView.findViewById(R.id.list_item_textview2);
                     TextView tvh = (TextView) convertView.findViewById(R.id.list_item_textview3);
+                    ImageView Bild = (ImageView) convertView.findViewById(R.id.imageView);
                     // Populate the data into the template view using the data object
                     tvn.setText(user.name);
                     tvl.setText(user.lo);
                     tvh.setText(user.heigth);
+                    new DownloadImageTask(Bild) .execute(user.bild);
+
                     // Return the completed view to render on screen
                     return convertView;
                 }
@@ -221,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
                     snusArr.add(m);
 
-                    lista newUser = new lista(snusArr.get(i).namn(), snusArr.get(i).com(), snusArr.get(i).cost());
+                    lista newUser = new lista(snusArr.get(i).namn(), snusArr.get(i).com(), snusArr.get(i).cost(), snusArr.get(i).img());
 
                     adapter.add(newUser);
 
@@ -249,6 +257,30 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
 

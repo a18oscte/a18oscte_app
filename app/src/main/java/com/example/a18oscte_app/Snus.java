@@ -22,7 +22,7 @@ public class Snus {
 
     public String info(){
         String tmp;
-        tmp ="Pris per dosa: "+ pris+"\nFöretag: " + company + "\nMängd i dosan: " + mangd+"g\nKategori: " + kategori + "\nNikotinhalt: " + styrka+ " mg/g";
+        tmp ="Pris per dosa: "+ pris+" Kr\nFöretag: " + company + "\nMängd i dosan: " + mangd+"g\nKategori: " + kategori + "\nNikotinhalt: " + styrka+ " mg/g";
 
         return tmp;
     }
