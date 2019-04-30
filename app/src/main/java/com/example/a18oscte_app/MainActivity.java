@@ -78,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.action_about){
+            launch3Activity();
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
     private class FetchData extends AsyncTask<Void,Void,String> {
@@ -257,6 +263,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+    public void launch3Activity() {
+        Intent intent = new Intent(this, About.class);
+        startActivity(intent);
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
