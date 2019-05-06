@@ -20,27 +20,31 @@ public class Snus {
         bild = b;
     }
 
-    public String info(){
-        String tmp;
-        tmp ="Pris per dosa: "+ pris+" Kr\nFöretag: " + company + "\nMängd i dosan: " + mangd+"g\nKategori: " + kategori + "\nNikotinhalt: " + styrka+ " mg/g";
-
-        return tmp;
-    }
-
-    public String namn(){
+    public String getName() {
         return name;
     }
 
-    public String com(){
+    public String getCompany() {
         return company;
     }
 
-    public String cost(){
-        String he = pris + " Kr/st";
-        return he;
+    public String getMangd() {
+        return mangd;
     }
 
-    public String img(){
+    public String getKategori() {
+        return kategori;
+    }
+
+    public int getStyrka() {
+        return styrka;
+    }
+
+    public int getPris() {
+        return pris;
+    }
+
+    public String getBild() {
         return bild;
     }
 }

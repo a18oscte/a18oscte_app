@@ -5,4 +5,11 @@
     <string name="action_about">About</string>
     <string name="snusNamn">Placeholder</string>
     <string name="aboutText">Målgruppen för den här appen är för personer över 18 år som vill veta mer om olika snussorter. Appen är designad så att det ska vara lätt för mål gruppen att hitta information om sitt favorit snus.</string>
+    <string-array name="planets_array">
+        <item>Ingen Sortering</item>
+        <item>A-Ö</item>
+        <item>Ö-A</item>
+        <item>Sortera efter nikotinhalt</item>
+        <item>Sortera efter pris</item>
+    </string-array>
 </resources>

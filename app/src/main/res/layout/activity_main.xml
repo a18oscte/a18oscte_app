@@ -21,11 +21,29 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        android:textColor="#99000000"
+        android:textSize="14dp"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:id="@+id/separator"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="89.8dp"/>
+
     <ListView
         android:id="@+id/my_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="90dp">
+
     </ListView>
 
 </android.support.design.widget.CoordinatorLayout>
