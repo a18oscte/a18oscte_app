@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         val = parent.getItemAtPosition(pos).toString();
-        //visa();
+        visa();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if(id == R.id.action_refresh){
             new FetchData().execute();
-            visa();
+            //visa();
             return true;
         }
 
