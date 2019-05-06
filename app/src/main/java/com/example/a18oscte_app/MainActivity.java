@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if(id == R.id.action_refresh){
             new FetchData().execute();
-            //visa();
+            visa();
             return true;
         }
 
