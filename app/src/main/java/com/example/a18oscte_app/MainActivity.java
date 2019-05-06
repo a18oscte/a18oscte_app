@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
     }
-
 
     public static final String EXTRA_MESSAGE = "MESSAGE";
     public static final String EXTRA_MESSAGE2 = "MESSAGE2";
@@ -64,51 +62,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.planets_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-
         spinner.setOnItemSelectedListener(this);
 
         visa();
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int id = item.getItemId();
 
         if(id == R.id.action_refresh){
             new FetchData().execute();
-            visa();
             return true;
         }
 
         if(id == R.id.action_about){
             launch3Activity();
-
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     private class FetchData extends AsyncTask<Void,Void,String> {
@@ -176,18 +159,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         protected void onPostExecute(String o) {
             super.onPostExecute(o);
-
-            final ArrayList<Snus> snusArr = new ArrayList();
-
-            // This code executes after we have received our data. The String object o holds
-            // the un-parsed JSON string or is null if we had an IOException during the fetch.
-
-            // Implement a parsing code that loops through the entire JSON and creates objects
-            // of our newly created Mountain class.
-
-
             try {
-
                 JSONArray a = new JSONArray(o);
                 SnusReaderDbHelper snusReaderDBHelper = new SnusReaderDbHelper(getApplicationContext());
                 final SQLiteDatabase db = snusReaderDBHelper.getWritableDatabase();
@@ -207,24 +179,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     values.put(SnusReaderContract.Entry.COLUMN_NAME_NIKOTINHALT, m.getStyrka());
                     values.put(SnusReaderContract.Entry.COLUMN_NAME_BILD, m.getBild());
 
-
-// Insert the new row, returning the primary key value of the new row
                     long newRowId = db.insert(SnusReaderContract.Entry.TABLE_NAME, null, values);
-
-
-
-
                 }
-
+                visa();
             }catch (JSONException e) {
                 Log.e("brom", "E:" + e.getMessage());
             }
-
         }
-
-
-
-
     }
 
     public void launchSecondActivity(View view, String n, String t, String u) {
@@ -233,11 +194,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         intent.putExtra(EXTRA_MESSAGE2, t);
         intent.putExtra(EXTRA_MESSAGE3, u);
         startActivity(intent);
-
-
-
-
     }
+
     public void launch3Activity() {
         Intent intent = new Intent(this, About.class);
         startActivity(intent);
@@ -261,7 +219,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
             return mIcon11;
         }
-
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }
@@ -281,7 +238,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 SnusReaderContract.Entry.COLUMN_NAME_BILD
         };
 
-
         sortOrder = null;
 
         if (val.equals("A-Ö")) {
@@ -294,19 +250,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             sortOrder = SnusReaderContract.Entry.COLUMN_NAME_PRIS + " ASC";
         }
 
-
         final Cursor cursor = db.query(
-                SnusReaderContract.Entry.TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                sortOrder               // The sort order
+                SnusReaderContract.Entry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                sortOrder
         );
-
-
-
 
         class lista {
             public String name;
@@ -329,33 +281,25 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                // Get the data item for this position
                 lista user = getItem(position);
-                // Check if an existing view is being reused, otherwise inflate the view
                 if (convertView == null) {
                     convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_textview, parent, false);
                 }
-                // Lookup view for data population
                 TextView tvn = (TextView) convertView.findViewById(R.id.list_item_textview);
                 TextView tvl = (TextView) convertView.findViewById(R.id.list_item_textview2);
                 TextView tvh = (TextView) convertView.findViewById(R.id.list_item_textview3);
                 ImageView Bild = (ImageView) convertView.findViewById(R.id.imageView);
-                // Populate the data into the template view using the data object
                 tvn.setText(user.name);
                 tvl.setText(user.lo);
                 tvh.setText(user.heigth + " kr/dosa");
                 new DownloadImageTask(Bild) .execute(user.bild);
 
-                // Return the completed view to render on screen
                 return convertView;
             }
         }
 
-        // Construct the data source
         ArrayList<lista> arrayOfUsers = new ArrayList<lista>();
-// Create the adapter to convert the array to views
         UsersAdapter adapter = new UsersAdapter(getApplicationContext(), arrayOfUsers);
-// Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.my_listview);
         listView.setAdapter(adapter);
 
@@ -401,5 +345,3 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
 }
-
-
